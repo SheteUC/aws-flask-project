@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+    {% if user %}
+        <h1>Welcome, {{ user[2] }} {{ user[3] }}</h1>
+        <h3>Your Details:</h3>
+        <ul>
+            <li>Username: {{ user[0] }}</li>
+            <li>Email: {{ user[4] }}</li>
+            <li>Address: {{ user[5] }}</li>
+        </ul>
+
+        <hr>
+        <h3>Upload File (Limerick.txt)</h3>
+        <p>Select a text file to upload. The system will count the words and allow you to download it back.</p>
+        <form method="POST" action="/upload/{{ user[0] }}" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload and Count Words">
+        </form>
+    {% endif %}
+
+    {% if word_count is defined %}
+        <div style="border: 1px solid green; padding: 10px; margin-top: 20px;">
+            <h3>File Analysis Result:</h3>
+            <p><b>Word Count:</b> {{ word_count }}</p>
+            <a href="/download/{{ filename }}">Download File Again</a>
+        </div>
+    {% endif %}
+
+    <br><br>
+    <a href="/login_page">Logout / Re-login</a>
+</body>
+</html>
